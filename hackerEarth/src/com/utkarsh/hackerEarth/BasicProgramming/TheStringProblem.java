@@ -2,6 +2,8 @@ package com.utkarsh.hackerEarth.BasicProgramming;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TheStringProblem {
 
@@ -13,58 +15,52 @@ public class TheStringProblem {
 			if(testCases != null)
 			{
 				int test = Integer.parseInt(testCases);
-				while (test>0) {
+				T:
+					while (test-- > 0) {
 
-					 String inpStr = sc.readLine();
-			            int lowV = 0;
-			            int uppV = 0;
-			            for(Character cha: inpStr.toCharArray())
-			            {
-			                if(Character.isUpperCase(cha))
-			                {
-			                	if(isVowel(cha))
-			                	{
-			                		uppV++;
-			                	}
-			                }else
-			                {
-			                	if(isVowel(cha))
-			                	{
-			                		lowV++;
-			                	}
-			                }
-			            }
-			            
-			            if(lowV == 5 || uppV == 5)
-			            {
-			            	System.out.println("lovely string");
-			            }else
-			            {
-			            	System.out.println("ugly string");
-			            }
-					test--;
-				}
+						String inpStr = sc.readLine();
+						Set<Character> lowV = new HashSet<>();
+						Set<Character> uppV = new HashSet<>();
+						for(Character cha: inpStr.toCharArray())
+						{
+							if(isVowel(cha))
+							{
+								if(Character.isUpperCase(cha))
+									uppV.add(cha);
+								else
+									lowV.add(cha);
+							}
+
+							if(lowV.size() ==5 || uppV.size() == 5)
+							{
+
+								System.out.println("lovely string");
+								continue T;
+							}
+						}
+						System.out.println("ugly string");
+					}
 			}
 		}catch (Exception e) {e.printStackTrace();}
 	}
-	
+
 	private static boolean isVowel(Character cha)
-    {
-        switch(cha)
-        {
-            case 'A':
-            case 'E':
-            case 'I':
-            case 'O':
-            case 'U':
-            case 'a':
-            case 'e':
-            case 'i':
-            case 'o':
-            case 'u':
-                return true;
-            default:
-                return false;
-        }
-    }
+	{
+		switch(cha)
+		{
+		case 'A':
+		case 'E':
+		case 'I':
+		case 'O':
+		case 'U':
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+			return true;
+		default:
+			return false;
+		}
+	}
 }
